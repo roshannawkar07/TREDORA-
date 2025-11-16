@@ -17,22 +17,25 @@ connectDB();
 connectCloudinary();
 
 // -----------------------
-// ⚠️ CORS FIX (IMPORTANT)
+// ✔ FIXED CORS CONFIG
 // -----------------------
-import cors from "cors";
-
-// Allow both frontend and admin origins
 app.use(
   cors({
     origin: [
       "http://localhost:5173", // frontend
       "http://localhost:5174", // admin panel
-      "https://your-netlify-frontend-url.netlify.app", // (future)
-      "https://your-netlify-admin-url.netlify.app", // (future)
+      "https://tredora-back.onrender.com", // backend itself (important)
+      "https://your-frontend-url", // add your real frontend URL later
+      "https://your-admin-url", // add admin URL later
     ],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "token"],
     credentials: true,
   })
 );
+
+// Allow preflight (OPTIONS)
+app.options("*", cors());
 
 // Middlewares
 app.use(express.json());
