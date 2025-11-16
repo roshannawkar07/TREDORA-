@@ -19,11 +19,16 @@ connectCloudinary();
 // -----------------------
 // ⚠️ CORS FIX (IMPORTANT)
 // -----------------------
+import cors from "cors";
+
+// Allow both frontend and admin origins
 app.use(
   cors({
     origin: [
-      "http://localhost:5173", // local frontend
-      "https://your-netlify-site.netlify.app", // REPLACE with your real Netlify URL
+      "http://localhost:5173", // frontend
+      "http://localhost:5174", // admin panel
+      "https://your-netlify-frontend-url.netlify.app", // (future)
+      "https://your-netlify-admin-url.netlify.app", // (future)
     ],
     credentials: true,
   })
